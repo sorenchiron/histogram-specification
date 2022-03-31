@@ -117,11 +117,31 @@ f(x) = 1 - H_P(H_Q(x)),
 
 which is the desired optimal solution.
 
+For discrete distributions $P,Q \in \mathbb{R}^N$ with $p_{max} = \max (P)$ and $q_{max}$ respectively, the corresponding mapping function is: 
+
+\begin{align}
+f(x) = q_{max} - \frac{q_{max}}{N}H_P(\frac{p_{max}}{N}H_Q(x \frac{ q_{max}}{p_{max}})),
+\end{align} 
 
 
+\section{Histogram Equalization}
+A mapping function $f(x)$ that equalizes the histogram can be computed given that:
+\begin{align}
+h_Q(x) = C,
+\end{align}
+where $C$ is a constant value. 
 
+Under continuous distribution assumption, we have:
 
+\begin{align}
+H_Q(x) &= x, \\
+f(x) & = 1 - H_P(x).
+\end{align}
 
+Then in the discrete case, the mapping is :
+\begin{align}
+f(x) =  q_{max} - \frac{q_{max}}{N}H_P(x).
+\end{align}
 
 
 
