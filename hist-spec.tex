@@ -1,0 +1,146 @@
+% XeLaTeX can use any Mac OS X font. See the setromanfont command below.
+% Input to XeLaTeX is full Unicode, so Unicode characters can be typed directly into the source.
+
+% The next lines tell TeXShop to typeset with xelatex, and to open and save the source with Unicode encoding.
+
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[12pt]{article}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{subfigure}
+\usepackage{amsfonts}
+\usepackage{xcolor}
+\def\d{\mathrm{d}}
+\def\E{\mathrm{E}}
+\def\L{\mathcal{L}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+% Will Robertson's fontspec.sty can be used to simplify font choices.
+% To experiment, open /Applications/Font Book to examine the fonts provided on Mac OS X,
+% and change "Hoefler Text" to any of these choices.
+
+\usepackage{fontspec,xltxtra,xunicode}
+\defaultfontfeatures{Mapping=tex-text}
+\setromanfont[Mapping=tex-text]{Hoefler Text}
+\setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Gill Sans}
+\setmonofont[Scale=MatchLowercase]{Andale Mono}
+
+\title{Histogram Specification}
+\author{CHEN Siyu}
+%\date{}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+% For many users, the previous commands will be enough.
+% If you want to directly input Unicode, add an Input Menu or Keyboard to the menu bar 
+% using the International Panel in System Preferences.
+% Unicode must be typeset using a font containing the appropriate characters.
+% Remove the comment signs below for examples.
+
+% \newfontfamily{\A}{Geeza Pro}
+% \newfontfamily{\H}[Scale=0.9]{Lucida Grande}
+% \newfontfamily{\J}[Scale=0.85]{Osaka}
+
+% Here are some multilingual Unicode fonts: this is Arabic text: {\A السلام عليكم}, this is Hebrew: {\H שלום}, 
+% and here's some Japanese: {\J 今日は}.
+
+\begin{abstract}
+This article describes Histogram Specification, whose purpose is to obtain a function $f(p)$ to map the given data into a specified histogram.
+
+This is useful when raw images directly read from sensors are not ideal in brightness or contrast.
+\end{abstract}
+
+
+\section{Problem definition}
+
+Given a series of data $P=\{p_1,p_2,...,p_N\}, p \in \mathbb{N}$, its histogram can be expressed as 
+\begin{equation}
+h_P(p)=n_p,
+\end{equation}
+in which, $n_p$ denotes the number of element that values $p$ in sequence $P$.
+
+Given a desired target histogram $h_Q(q) = n_q$, the objective is to find a monotonic mapping function $f(p) = q$ such that:
+
+\begin{align}
+P'&= \{f(q_1),f(q_2\},...,f(q_N) \} = \{p'_1,p'_2,...,p'_N\}, \\
+h_{P'}(p) &=h_{Q}(p). 
+\end{align}
+
+\section{Derivations}
+The former problem definition is in discrete form. In some extreme but not rare cases, optimal solution may not exist for discrete histogram specification. For example:
+\begin{align}
+P=\{1,1,1,1,1\}, \\ 
+Q=\{1,2,3,4,5\}.
+\end{align}
+In the above scenario, a desired $f(p)$ does not exist.
+
+To simplify the problem, we assume continuous distribution on set $P$ and $Q$ such that $P,Q\in [0,1]^N$. In other word, $h_P(x)$ and $h_Q(x)$ are both continuous. 
+
+According to the definition of the problem, several constrains hold as listed below:
+
+\begin{align}
+h_{P'}(x) &=h_{Q}(x),\label{eq:eqden} \\
+\frac{\partial f(x)}{\partial x} & \ge 0,
+\end{align}
+
+in which $x \in [0,1] $.
+
+According to Eq. \ref{eq:eqden}, if the distribution density is identical everywhere, then the cumulative distribution shall also be equal-valued.
+
+\begin{align}
+\int_0^x h_{P'}(z) \diff z &= \int_0^x h_{Q}(z) \diff z.
+\end{align}
+
+The above equation can be transformed into the following form:
+
+\begin{align}
+\int_0^{f(x)} h_{P}(z) \diff z &= \int_0^x h_{Q}(z) \diff z, \\
+H_P(f(x)) &= H_Q(x),
+\end{align}
+where the original functions $H_P(x),H_Q(x)$ are the cumulative intensity functions of $h_P(x),h_Q(x)$. To obtain $f(x)$, the inverse function of $H$ can be applied to both side:
+
+\begin{align}
+H^{-1}_P \left( H_P(f(x)) \right)  &= H^{-1}_P \left( H_Q(x) \right).
+\end{align}
+
+For cumulative intensity function $H(x) \in [0,1], x\in [0,1] $, the inverse function is simply $H^{-1} = 1-H$. Hence the equation can be further substituted into:
+
+\begin{align}
+f(x) = 1 - H_P(H_Q(x)),
+\end{align}
+
+which is the desired optimal solution.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}  
