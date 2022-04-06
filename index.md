@@ -11,3 +11,8 @@ the content can be accessed below:
         <p>This browser does not support PDFs. Please download the PDF to view it: <a href="https://github.com/sorenchiron/histogram-specification/blob/main/hist-spec.pdf">Download PDF</a>.</p>
     </embed>
 </object>
+
+### Related material
+
+https://www.math.uci.edu/icamp/courses/math77c/demos/hist_eq.pdf
+
