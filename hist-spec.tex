@@ -85,7 +85,7 @@ To simplify the problem, we assume continuous distribution on set $P$ and $Q$ su
 According to the definition of the problem, several constrains hold as listed below:
 
 \begin{align}
-h_{P'}(x) &=h_{Q}(x),\label{eq:eqden} \\
+h_{P}(x) &=h_{Q}(f(x)),\label{eq:eqden} \\
 \frac{\partial f(x)}{\partial x} & \ge 0,
 \end{align}
 
@@ -94,34 +94,29 @@ in which $x \in [0,1] $.
 According to Eq. \ref{eq:eqden}, if the distribution density is identical everywhere, then the cumulative distribution shall also be equal-valued.
 
 \begin{align}
-\int_0^x h_{P'}(z) \diff z &= \int_0^x h_{Q}(z) \diff z.
+\int_0^x h_{P}(z) \diff z &= \int_0^{f(x)} h_{Q}(z) \diff z.
 \end{align}
 
 The above equation can be transformed into the following form:
 
 \begin{align}
-\int_0^{f(x)} h_{P}(z) \diff z &= \int_0^x h_{Q}(z) \diff z, \\
-H_P(f(x)) &= H_Q(x),
+\int_0^{x} h_{P}(z) \diff z &= \int_0^{f(x)} h_{Q}(z) \diff z, \\
+H_P(x) &= H_Q(f(x)),
 \end{align}
-where the original functions $H_P(x),H_Q(x)$ are the cumulative intensity functions of $h_P(x),h_Q(x)$. To obtain $f(x)$, the inverse function of $H$ can be applied to both side:
+where the original functions $H_P(x),H_Q(x)$ are the cumulative intensity functions of $h_P(x),h_Q(x)$. To obtain $f(x)$, the inverse function of $H_Q$ can be applied to both side:
 
 \begin{align}
-H^{-1}_P \left( H_P(f(x)) \right)  &= H^{-1}_P \left( H_Q(x) \right).
-\end{align}
-
-For cumulative intensity function $H(x) \in [0,1], x\in [0,1] $, the inverse function is simply $H^{-1} = 1-H$. Hence the equation can be further substituted into:
-
-\begin{align}
-f(x) = 1 - H_P(H_Q(x)),
+H^{-1}_Q \left( H_P(f(x)) \right)  &= H^{-1}_Q \left( H_Q(f(x)) \right) \\ 
+H^{-1}_Q \left( H_P(x) \right) &= f(x),
 \end{align}
 
 which is the desired optimal solution.
 
-For discrete distributions $P,Q \in \mathbb{R}^N$ with $p_{max} = \max (P)$ and $q_{max}$ respectively, the corresponding mapping function is: 
+%For discrete distributions $P,Q \in \mathbb{R}^N$ with $p_{max} = \max (P)$ and $q_{max}$ respectively, the corresponding mapping function is: 
 
-\begin{align}
-f(x) = q_{max} - \frac{q_{max}}{N}H_P(\frac{p_{max}}{N}H_Q(x \frac{ q_{max}}{p_{max}})),
-\end{align} 
+%\begin{align}
+%f(x) = q_{max} - \frac{q_{max}}{N}H_P(\frac{p_{max}}{N}H_Q(x \frac{ q_{max}}{p_{max}})),
+%\end{align} 
 
 
 \section{Histogram Equalization}
@@ -135,13 +130,14 @@ Under continuous distribution assumption, we have:
 
 \begin{align}
 H_Q(x) &= x, \\
-f(x) & = 1 - H_P(x).
+H^{-1}_Q(x) &= x, \\
+f(x) & = H_P(x).
 \end{align}
 
-Then in the discrete case, the mapping is :
-\begin{align}
-f(x) =  q_{max} - \frac{q_{max}}{N}H_P(x).
-\end{align}
+%Then in the discrete case, the mapping is :
+%\begin{align}
+%f(x) =  q_{max} - \frac{q_{max}}{N}H_P(x).
+%\end{align}
 
 
 
